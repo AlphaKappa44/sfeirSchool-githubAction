@@ -6,12 +6,23 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:  
-    # Add the checkout action   
+      # Add the checkout action   
       - name: Check out repo
         uses: actions/checkout@v3.3.0
-# Setup Node lts/* version with this action
+      # Setup Node lts/* version with this action
       - name: Setup Node lts/* version
         uses: actions/setup-node@v3.3.0
         with:
           node-version: 16
       - run: npm install
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:  
+      - name: Check out repo
+        uses: actions/checkout@v3.3.0
+      - name: Setup Node lts/* version
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: 16
+      - run: npm test
